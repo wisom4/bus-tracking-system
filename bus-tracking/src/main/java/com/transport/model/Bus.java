@@ -8,11 +8,12 @@ public class Bus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String numberPlate;
     private double latitude;
     private double longitude;
+    private double speed;
+    private String status;
 
     public Bus() {}
 
@@ -21,8 +22,6 @@ public class Bus {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-    // ✅ GETTERS (VERY IMPORTANT)
 
     public Long getId() {
         return id;
@@ -44,7 +43,13 @@ public class Bus {
         return longitude;
     }
 
-    // ✅ SETTERS
+    public double getSpeed() {
+        return speed;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -64,5 +69,13 @@ public class Bus {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

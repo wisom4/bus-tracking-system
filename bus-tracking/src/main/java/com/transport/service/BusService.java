@@ -1,4 +1,5 @@
 package com.transport.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +18,16 @@ public class BusService {
 
     public void updateBus(BusUpdateDTO dto) {
 
-        // 1. Save/update DB
-        Bus bus = busRepository.findByNumberPlate(dto.getNumberPlate());
+        Bus bus = busRepository.findByNumberPlate(dto.getNumberPlate())
+                .orElseThrow(() -> new RuntimeException("Bus not found: " + dto.getNumberPlate()));
 
         bus.setLatitude(dto.getLatitude());
-        bus.setLongitude(dto.getLatitude());
+        bus.setLongitude(dto.getLongitude());
         bus.setSpeed(dto.getSpeed());
         bus.setStatus(dto.getStatus());
 
         busRepository.save(bus);
 
-        // 2. Send real-time update
         webSocketService.sendBusUpdate(dto);
     }
 }
